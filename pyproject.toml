@@ -32,3 +32,16 @@ requires = [
     "numpy>=2.0.0",
 ]
 build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.0.1",
+    "reuse>=4.0.3",
+    "ruff>=0.7.2",
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"

@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: Enno Hermann
+#
+# SPDX-License-Identifier: CC0-1.0
+
+version = 1
+SPDX-PackageName = "monotonic_alignment_search"
+SPDX-PackageSupplier = "Enno Hermann <enno.hermann@gmail.com>"
+
+[[annotations]]
+path = ".python-version"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Enno Hermann"
+SPDX-License-Identifier = "CC0-1.0"
