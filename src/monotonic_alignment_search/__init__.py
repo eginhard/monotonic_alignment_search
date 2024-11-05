@@ -22,11 +22,11 @@ def maximum_path(value: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
     value = value * mask
     device = value.device
     dtype = value.dtype
-    value = value.data.cpu().numpy().astype(np.float32)
-    path = np.zeros_like(value).astype(np.int32)
-    mask = mask.data.cpu().numpy()
+    value_np = value.data.cpu().numpy().astype(np.float32)
+    path = np.zeros_like(value_np).astype(np.int32)
+    mask_np = mask.data.cpu().numpy()
 
-    t_x_max = mask.sum(1)[:, 0].astype(np.int32)
-    t_y_max = mask.sum(2)[:, 0].astype(np.int32)
-    maximum_path_c(path, value, t_x_max, t_y_max)
+    t_x_max = mask_np.sum(1)[:, 0].astype(np.int32)
+    t_y_max = mask_np.sum(2)[:, 0].astype(np.int32)
+    maximum_path_c(path, value_np, t_x_max, t_y_max)
     return torch.from_numpy(path).to(device=device, dtype=dtype)
