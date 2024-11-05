@@ -82,3 +82,7 @@ skip_empty = true
 [tool.coverage.run]
 source = ["src/monotonic_alignment_search", "tests"]
 command_line = "-m pytest"
+
+[tool.cibuildwheel]
+build = "cp*"
+skip = "*-win32 *i686"
