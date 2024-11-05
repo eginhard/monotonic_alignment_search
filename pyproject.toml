@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: Enno Hermann
+#
+# SPDX-License-Identifier: MIT
+
+[project]
+name = "monotonic-alignment-search"
+version = "0.1.0"
+description = "Monotonically align text and speech"
+readme = "README.md"
+authors = [
+    { name = "Jaehyeon Kim", email = "jaywalnut310@gmail.com" }
+]
+maintainers = [
+    { name = "Enno Hermann", email = "enno.hermann@gmail.com" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.21.6; python_version < '3.11'",
+    "numpy>=1.24.4; python_version == '3.11'",
+    "numpy>=1.26.4; python_version == '3.12'",
+    "numpy>=2.1.3; python_version == '3.13'",
+    "torch>=1.12.1; python_version < '3.11'",
+    "torch>=2.1.1; python_version == '3.11'",
+    "torch>=2.2; python_version == '3.12'",
+    "torch>=2.5.1; python_version == '3.13'",
+]
+
+[build-system]
+requires = [
+    "setuptools>=61",
+    "cython>=3.0.0",
+    "numpy>=2.0.0",
+]
+build-backend = "setuptools.build_meta"
