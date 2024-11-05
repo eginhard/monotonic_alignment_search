@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: Enno Hermann
+#
+# SPDX-License-Identifier: MIT
+
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.9, "3.10", "3.11", "3.12", "3.13"]
+        uv-resolution: ["lowest-direct", "highest"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.4.30"
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
+      - name: Tests
+        run: uv run --python=${{ matrix.python-version }} --resolution=${{ matrix.uv-resolution }} coverage run --parallel
+      - name: List packages
+        run: uv pip list
+      - name: Upload coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          include-hidden-files: true
+          name: coverage-data-${{ matrix.python-version }}-${{ matrix.uv-resolution }}
+          path: .coverage.*
+          if-no-files-found: ignore
+  coverage:
+    if: always()
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.4.30"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: coverage-data-*
+          merge-multiple: true
+      - name: Combine coverage
+        run: |
+          uv python install 3.12
+          uvx coverage combine
+          uvx coverage html --skip-covered --skip-empty
+          uvx coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
