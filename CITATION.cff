@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: Enno Hermann
+#
+# SPDX-License-Identifier: MIT
+
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below. Also consider citing the Glow-TTS paper."
+title: "monotonic-alignment-search"
+abstract: "Implementation of monotonic alignment search from Glow-TTS"
+date-released: 2024
+authors:
+  - family-names: Hermann
+    given-names: Enno
+version: 0.1.0
+license: "MIT"
+url: "https://github.com/eginhard/monotonic_alignment_search"
+repository-code: "https://github.com/eginhard/monotonic_alignment_search"
