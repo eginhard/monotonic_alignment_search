@@ -6,8 +6,22 @@ SPDX-License-Identifier: MIT
 
 # Monotonic Alignment Search (MAS)
 
+[![PyPI - License](https://img.shields.io/pypi/l/monotonic-alignment-search)](https://github.com/eginhard/monotonic_alignment_search/blob/main/LICENSE)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/monotonic-alignment-search)
+[![PyPI - Version](https://img.shields.io/pypi/v/monotonic-alignment-search)](https://pypi.org/project/monotonic-alignment-search)
+![GithubActions](https://github.com/eginhard/monotonic_alignment_search/actions/workflows/test.yml/badge.svg)
+![GithubActions](https://github.com/eginhard/monotonic_alignment_search/actions/workflows/lint.yml/badge.svg)
+
 Implementation of MAS from [Glow-TTS](https://github.com/jaywalnut310/glow-tts)
 for easy reuse in other projects.
+
+## Installation
+
+```bash
+pip install monotonic-alignment-search
+```
+
+Wheels are provided for Linux, Mac, and Windows.
 
 ## Usage
 
