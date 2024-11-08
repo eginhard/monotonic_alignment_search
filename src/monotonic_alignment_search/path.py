@@ -59,7 +59,7 @@ def maximum_path_numpy(
     device = value.device
     dtype = value.dtype
     value_np = value.cpu().detach().numpy()
-    mask_np = mask.cpu().detach().numpy().astype(np.bool)
+    mask_np = mask.cpu().detach().numpy().astype(bool)
 
     b, t_x, t_y = value_np.shape
     direction = np.zeros(value_np.shape, dtype=np.int64)
