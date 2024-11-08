@@ -70,7 +70,7 @@ dev = [
 select = ["ALL"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["D104"]
+"tests/*" = ["D104", "S101"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
