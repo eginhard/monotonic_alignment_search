@@ -10,7 +10,7 @@ date-released: 2024
 authors:
   - family-names: Hermann
     given-names: Enno
-version: 0.1.0
+version: 0.1.1
 license: "MIT"
 url: "https://github.com/eginhard/monotonic_alignment_search"
 repository-code: "https://github.com/eginhard/monotonic_alignment_search"
