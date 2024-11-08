@@ -33,8 +33,14 @@ from monotonic_alignment_search import maximum_path
 
 # value (torch.Tensor): [batch_size, t_x, t_y]
 # mask  (torch.Tensor): [batch_size, t_x, t_y]
-path = maximum_path(value, mask)
+path = maximum_path(value, mask, implementation="cython")
 ```
+
+The `implementation` argument allows choosing from one of the following
+implementations:
+
+- `cython` (default): Cython-optimised
+- `numpy`: pure Numpy
 
 ## References
 
