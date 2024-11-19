@@ -32,15 +32,11 @@ jobs:
           - python-version: "3.13"
     steps:
       - uses: actions/checkout@v4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          version: "0.4.30"
-          enable-cache: true
-          cache-dependency-glob: "**/pyproject.toml"
+      - name: Setup uv
+        uses: ./.github/actions/setup-uv
       - name: Tests
         run: |
-          uv run -v --python=${{ matrix.python-version }} \
+          uv run --python=${{ matrix.python-version }} \
             ${{ matrix.numpy-version }} ${{ matrix.torch-version}} \
             coverage run --parallel
       - name: Upload coverage data
@@ -56,10 +52,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          version: "0.4.30"
+      - name: Setup uv
+        uses: ./.github/actions/setup-uv
       - uses: actions/download-artifact@v4
         with:
           pattern: coverage-data-*
