@@ -16,8 +16,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.9, "3.10", "3.11", "3.12", "3.13"]
-        uv-resolution: ["lowest-direct", "highest"]
+        include:
+          - python-version: "3.9"
+            numpy-version: "--with numpy==1.21.6"
+            torch-version: "--with torch==1.12.1+cpu"
+          - python-version: "3.10"
+            numpy-version: "--with numpy==1.21.6"
+            torch-version: "--with torch==1.12.1+cpu"
+          - python-version: "3.11"
+            numpy-version: "--with numpy==1.24.4"
+            torch-version: "--with torch==2.1.1+cpu"
+          - python-version: "3.12"
+            numpy-version: "--with numpy==1.26.4"
+            torch-version: "--with torch==2.2.2+cpu"
+          - python-version: "3.13"
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
@@ -27,14 +39,15 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
       - name: Tests
-        run: uv run --python=${{ matrix.python-version }} --resolution=${{ matrix.uv-resolution }} coverage run --parallel
-      - name: List packages
-        run: uv pip list
+        run: |
+          uv run -v --python=${{ matrix.python-version }} \
+            ${{ matrix.numpy-version }} ${{ matrix.torch-version}} \
+            coverage run --parallel
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
         with:
           include-hidden-files: true
-          name: coverage-data-${{ matrix.python-version }}-${{ matrix.uv-resolution }}
+          name: coverage-data-${{ matrix.python-version }}
           path: .coverage.*
           if-no-files-found: ignore
   coverage:
