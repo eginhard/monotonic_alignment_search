@@ -21,7 +21,14 @@ for easy reuse in other projects.
 pip install monotonic-alignment-search
 ```
 
-Wheels are provided for Linux, Mac, and Windows.
+Wheels are provided for Linux, Mac, and Windows. Pytorch is not installed by
+default. You either first need to install it yourself, or install one of the
+following extras with [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv add monotonic-alignment-search[cpu]
+uv add monotonic-alignment-search[cuda]
+```
 
 ## Usage
 

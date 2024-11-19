@@ -36,7 +36,10 @@ jobs:
         uses: ./.github/actions/setup-uv
       - name: Tests
         run: |
-          uv run --python=${{ matrix.python-version }} \
+          uv sync
+          uv run -v --extra cpu \
+            --index https://download.pytorch.org/whl/cpu \
+            --index-strategy unsafe-best-match \
             ${{ matrix.numpy-version }} ${{ matrix.torch-version}} \
             coverage run --parallel
       - name: Upload coverage data
