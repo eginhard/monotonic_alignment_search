@@ -35,8 +35,39 @@ classifiers = [
 ]
 dependencies = [
     "numpy>=1.21.6",
+]
+
+[project.optional-dependencies]
+cpu = [
     "torch>=1.12.1",
 ]
+cuda = [
+    "torch>=1.12.1",
+]
+
+[tool.uv]
+conflicts = [
+  [
+    { extra = "cpu" },
+    { extra = "cuda" },
+  ],
+]
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu", extra = "cpu", marker = "platform_system != 'Darwin'" },
+  { index = "pytorch-cuda", extra = "cuda", marker = "platform_system == 'Windows'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cuda"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
 
 [project.urls]
 Repository = "https://github.com/eginhard/monotonic_alignment_search"
