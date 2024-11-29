@@ -18,17 +18,17 @@ jobs:
       matrix:
         include:
           - python-version: "3.9"
-            numpy-version: "--with numpy==1.21.6"
-            torch-version: "--with torch==1.12.1+cpu"
+            numpy-version: "numpy==1.21.6"
+            torch-version: "torch==1.12.1"
           - python-version: "3.10"
-            numpy-version: "--with numpy==1.21.6"
-            torch-version: "--with torch==1.12.1+cpu"
+            numpy-version: "numpy==1.21.6"
+            torch-version: "torch==1.12.1"
           - python-version: "3.11"
-            numpy-version: "--with numpy==1.24.4"
-            torch-version: "--with torch==2.1.1+cpu"
+            numpy-version: "numpy==1.24.4"
+            torch-version: "torch==2.1.1"
           - python-version: "3.12"
-            numpy-version: "--with numpy==1.26.4"
-            torch-version: "--with torch==2.2.2+cpu"
+            numpy-version: "numpy==1.26.4"
+            torch-version: "torch==2.2.2"
           - python-version: "3.13"
     steps:
       - uses: actions/checkout@v4
@@ -36,12 +36,11 @@ jobs:
         uses: ./.github/actions/setup-uv
       - name: Tests
         run: |
+          uv run -v --python 3.12 .github/scripts/add_uv_constraints.py \
+            ${{ matrix.numpy-version }} \
+            ${{ matrix.torch-version }}
           uv sync
-          uv run -v --extra cpu \
-            --index https://download.pytorch.org/whl/cpu \
-            --index-strategy unsafe-best-match \
-            ${{ matrix.numpy-version }} ${{ matrix.torch-version}} \
-            coverage run --parallel
+          uv run -v --extra cpu coverage run --parallel
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
         with:
